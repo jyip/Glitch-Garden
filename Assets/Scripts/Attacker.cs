@@ -4,8 +4,11 @@ using System.Collections;
 [RequireComponent (typeof (Rigidbody2D))]
 public class Attacker : MonoBehaviour {
 
+	[Tooltip ("Number of seconds between spawn time")]
+	public int seenEverySeconds;
 	[Range (-1f, 1.5f)]
 	public float currentSpeed;
+	
 	private Animator animator;
 	private GameObject currentObject;
 
