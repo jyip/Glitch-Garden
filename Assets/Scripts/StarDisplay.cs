@@ -6,7 +6,7 @@ using System.Collections;
 public class StarDisplay : MonoBehaviour {
 
 	private Text display;
-	private int totalStars = 100;
+	public int totalStars = 200;
 
 	public enum Status {SUCCESS, FAIL};
 
