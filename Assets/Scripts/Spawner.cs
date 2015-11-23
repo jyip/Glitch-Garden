@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
+	[Tooltip ("Delay time before spawning begins in seconds")]
+	public float spawnStartDelay;
 	public GameObject[] AttackerPrefabs;
 	
 	// Use this for initialization
@@ -20,6 +22,8 @@ public class Spawner : MonoBehaviour {
 	}
 
 	private bool isTimeToSpawn(GameObject attackerGameObject) {
+		if(Time.timeSinceLevelLoad < spawnStartDelay) return false;
+
 		Attacker attacker = attackerGameObject.GetComponent<Attacker>();
 
 		float meanSpawnDelay = attacker.seenEverySeconds;

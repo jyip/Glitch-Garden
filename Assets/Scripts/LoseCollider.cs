@@ -3,7 +3,11 @@ using System.Collections;
 
 public class LoseCollider : MonoBehaviour {
 
+	[Tooltip("Number of enemies crossed before player loses!")]
+	public int crossPoints;
+
 	private LevelManager levelManager;
+	private int crossPointsCounter = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +15,10 @@ public class LoseCollider : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D() {
-		levelManager.LoadLevel("03b Lose");
+		if(crossPointsCounter >= crossPoints) {
+			levelManager.LoadLevel("03b Lose");
+		} else {
+			crossPointsCounter++;
+		}
 	}
 }
