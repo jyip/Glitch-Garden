@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		//if (activePersona.isMoving ()) {
+			//freeze game
+		//}
 	}
 
 	void OnMouseDown() {
@@ -26,10 +28,10 @@ public class GameManager : MonoBehaviour
 			clearHighlightGrids();
 			highlightPossibleMoveGrids();
 		} else if (activePersona) {
-			Vector2 targetGridPoint = getSnappedWorldPointOfMouseClick();
-
 			// set active persona target move point
-
+			if(isValidMoveGrid()) {
+				activePersona.setTargetMove();
+			}
 		}
 	}
 
@@ -56,7 +58,12 @@ public class GameManager : MonoBehaviour
 				int xPoints = startPosition.x - x;
 				int yPoints = startPosition.y - y;
 
-				movePointsUsed = Math.Abs(xPoints) + Math.A
+				movePointsUsed = Math.Abs(xPoints) + Math.Abs(yPoints);
+				if(movePointsUsed <= movePoints) {
+					//spawn highlight grid
+
+					//add grid to highlightGrids array
+				}
 			}
 		}
 	}
@@ -69,6 +76,18 @@ public class GameManager : MonoBehaviour
 				activePersona = mapObject;
 				return true;
 				break;
+			}
+		}
+
+		return false;
+	}
+
+	bool isValidMoveGrid() {
+		Vector2 targetGridPoint = getSnappedWorldPointOfMouseClick();
+
+		foreach (GameObject highlightGrid in highlightGrids) {
+			if(highlightGrid.position == targetGridPoint.position) {
+				return true;
 			}
 		}
 
